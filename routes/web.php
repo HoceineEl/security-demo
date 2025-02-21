@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,6 +34,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+});
+
+// Admin routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::prefix('admin')
+        ->name('admin.')
+        ->group(function () {
+            Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+            Route::get('/users/create', [AdminController::class, 'createUser'])->name('users.create');
+            Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
+            Route::get('/users/{user}/edit', [AdminController::class, 'editUser'])->name('users.edit');
+            Route::put('/users/{user}', [AdminController::class, 'updateUser'])->name('users.update');
+            Route::delete('/users/{user}', [AdminController::class, 'destroyUser'])->name('users.destroy');
+        });
 });
 
 require __DIR__ . '/auth.php';
