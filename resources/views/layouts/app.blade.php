@@ -26,9 +26,12 @@ if (darkMode) {
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600&display=swap" rel="stylesheet" />
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <!-- Additional Styles -->
+    @stack('styles')
 </head>
 
 <body class="font-sans antialiased">
@@ -63,6 +66,8 @@ if (darkMode) {
         </main>
     </div>
 
+    <!-- Additional Scripts -->
+    @stack('scripts')
 </body>
 
 </html>

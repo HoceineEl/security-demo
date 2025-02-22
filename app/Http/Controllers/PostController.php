@@ -15,6 +15,9 @@ class PostController extends Controller
     {
         // Post::query()->delete();
         // Post::all()->each(fn($post) => $post->update(['content' => ""]));
+        // Post::all()->each(fn($post) => $post->delete());
+
+
         $posts = Post::query()
             ->when(!Auth::check(), function ($query) {
                 $query->where('is_published', true);
@@ -46,7 +49,9 @@ class PostController extends Controller
         //     'excerpt' => 'nullable|max:255',
         //     'featured_image' => 'nullable|image|max:2048',
         // ]);
+
         $request->merge(['is_published' => $request->is_published === 'on']);
+
         $post = new Post($request->all());
         $post->user_id = Auth::id();
         if ($request->hasFile('featured_image')) {

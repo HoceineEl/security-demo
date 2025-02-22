@@ -20,6 +20,8 @@ test('users can authenticate using the login screen', function () {
     $response->assertRedirect(route('posts.index', absolute: false));
 });
 
+
+
 test('users can not authenticate with invalid password', function () {
     $user = User::factory()->create();
 

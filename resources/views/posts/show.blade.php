@@ -50,7 +50,7 @@
                     @endif
 
                     <div class="prose dark:prose-invert prose-lg max-w-none">
-                        {!! nl2br(e($post->content)) !!}
+                        {!! htmlspecialchars($post->content, ENT_QUOTES | ENT_HTML5, 'UTF-8') !!}
                     </div>
                 </div>
             </article>
